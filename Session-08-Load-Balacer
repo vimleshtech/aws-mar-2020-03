@@ -1,0 +1,98 @@
+LB: Load balancer
+==========================
+A load balancer takes requests from clients(user/web browser) and distributes them across targets (instance) in a target group.
+
+Load balancing refers to efficiently distributing incoming network traffic across a group of backend servers, also known as a server farm or server pool. ... In this manner, a load balancer performs the following functions: 
+- Distributes client requests or network load efficiently across multiple servers
+
+
+Network OSI Layer : Layer 7
+=================================
+Application Layer		** 	7
+Presentaion Layer			6
+Session Layer				5
+Transaction Layer			4
+Network Layer			**	3
+Datalink Layer				2
+Physical Layer 				1
+
+There are following types of LB:
+==================================================
+1.  Application Load Balancers
+2.  Network Load Balancers 
+3.  And Classic Load Balancers (combination of App LB, and Net LB)
+
+1.  Application Load Balancers
+Application Load Balancers are used to route HTTP/HTTPS (or Layer 7) traffic. 
+
+2.  Network Load Balancers & Classic Load Balancers
+Network Load Balancers and Classic Load Balancers are used to route TCP (or Layer 4) traffic.
+
+Application Load Balancer
+=================================
+For example, if your task's container definition specifies port 80 for an NGINX container port, and port 0 for the host port, then the host port is dynamically chosen from the ephemeral port range of the container instance (such as 32768 to 61000 on the latest Amazon ECS-optimized AMI). When the task is launched, the NGINX container is registered with the Application Load Balancer as an instance ID and port combination, and traffic is distributed to the instance ID and port corresponding to that container. 
+
+Network Load Balancer
+A Network Load Balancer makes routing decisions at the transport layer (TCP/SSL). It can handle millions of requests per second. After the load balancer receives a connection, it selects a target from the target group for the default rule using a flow hash routing algorithm. It attempts to open a TCP connection to the selected target on the port specified in the listener configuration. It forwards the request without modifying the headers. Network Load Balancers support dynamic host port mapping. For example, if your task's container definition specifies port 80 for an NGINX container port, and port 0 for the host port, then the host port is dynamically chosen from the ephemeral port range of the container instance (such as 32768 to 61000 on the latest Amazon ECS-optimized AMI). When the task is launched, the NGINX container is registered with the Network Load Balancer as an instance ID and port combination, and traffic is distributed to the instance ID and port corresponding to that container. This dynamic mapping allows you to have multiple tasks from a single service on the same container instance.
+
+
+Classic Load Balancer
+A Classic Load Balancer makes routing decisions at either the transport layer (TCP/SSL) or the application layer (HTTP/HTTPS). Classic Load Balancers currently require a fixed relationship between the load balancer port and the container instance port. For example, it is possible to map the load balancer port 80 to the container instance port 3030 and the load balancer port 4040 to the container instance port 4040. However, it is not possible to map the load balancer port 80 to port 3030 on one container instance and port 4040 on another container instance. This static mapping requires that your cluster has at least as many container instances as the desired count of a single service that uses a Classic Load Balancer.
+
+
+Application Load Balancer
+Before you begin, ensure that you have a virtual private cloud (VPC) with at least one public subnet in each of the Availability Zones used by your targets.
+
+Step 1: Configure a Load Balancer and a Listener
+Step 2: Configure Security Settings for an HTTPS Listener
+Step 3: Configure a Security Group
+Step 4: Configure a Target Group    : EC2
+Step 5: Configure Targets for the Target Group
+Step 6: Create the Load Balancer
+
+Step 1:
+	create two EC2
+	13.229.150.51
+	Administrator
+	a?IE)2ynPqlk3Jz6Z-r4u.=8!md?$pk%
+
+
+	18.138.226.177
+	Administrator		
+	
+Step 2:
+	Install web server (IIS) in instance 
+		
+Step 3:
+	Deploy test web page
+		index.html 
+		
+Step 4:
+	Create Target Group
+	
+Step 5:
+	Create LB
+Step 6:
+	Configure Listener 
+	Configure Avaibility zone (at least two required)
+Step 7:
+	Security Group
+	
+172.31.0.0/16
+
+172.31.0.0/20
+172.31.16.0/20
+172.31.32.0/20
+
+
+VPC:
+==============
+	Sub1	: priv
+	Sub2	: pub			(instance1)
+		three avail	
+	Sub3	: pub			(instance)
+		two avail
+
+
+	
+
